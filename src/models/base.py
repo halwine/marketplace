@@ -1,13 +1,14 @@
 from datetime import datetime
 
 from sqlalchemy import DateTime, func
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
 class Base(DeclarativeBase):
     """
     Base class for initializing every other class
     """
+
     pass
 
 

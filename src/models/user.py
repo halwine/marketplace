@@ -1,7 +1,7 @@
 from datetime import datetime
 from uuid import UUID, uuid7
 
-from sqlalchemy import ForeignKey, String, DateTime, func
+from sqlalchemy import DateTime, ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from src.models.base import Base, TimestampMixin
@@ -41,7 +41,7 @@ class User(Base, TimestampMixin):
         default=False,
     )
 
-    addresses: Mapped[list["UserAddress"]] = relationship(back_populates="user")
+    addresses: Mapped[list[UserAddress]] = relationship(back_populates="user")
 
 
 class UserAddress(Base, TimestampMixin):
@@ -62,7 +62,7 @@ class UserAddress(Base, TimestampMixin):
     street: Mapped[str] = mapped_column(
         String(100),
     )
-    
+
     house: Mapped[str] = mapped_column(
         String(10),
     )
@@ -75,9 +75,4 @@ class UserAddress(Base, TimestampMixin):
         DateTime(timezone=True),
     )
 
-    user: Mapped["User"] = relationship(back_populates="addresses")
-
-
-
-
-
+    user: Mapped[User] = relationship(back_populates="addresses")
