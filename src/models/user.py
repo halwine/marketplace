@@ -4,10 +4,10 @@ from uuid import UUID, uuid7
 from sqlalchemy import DateTime, ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from src.models.base import Base, TimestampMixin
+from src.models.base import Base, SoftDeleteMixin, TimestampMixin
 
 
-class User(TimestampMixin, Base):
+class User(SoftDeleteMixin, TimestampMixin, Base):
     __tablename__ = "users"
 
     id: Mapped[UUID] = mapped_column(
@@ -41,10 +41,10 @@ class User(TimestampMixin, Base):
         default=False,
     )
 
-    addresses: Mapped[list[UserAddress]] = relationship(back_populates="user")
+    addresses: Mapped[list["UserAddress"]] = relationship(back_populates="user")
 
 
-class UserAddress(Base, TimestampMixin):
+class UserAddress(TimestampMixin, Base):
     __tablename__ = "user_addresses"
 
     id: Mapped[int] = mapped_column(
@@ -75,4 +75,4 @@ class UserAddress(Base, TimestampMixin):
         DateTime(timezone=True),
     )
 
-    user: Mapped[User] = relationship(back_populates="addresses")
+    user: Mapped["User"] = relationship(back_populates="addresses")
