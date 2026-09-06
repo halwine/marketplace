@@ -8,6 +8,7 @@ class Base(DeclarativeBase):
     """
     Base class for initializing every other class
     """
+
     pass
 
 
@@ -27,6 +28,4 @@ class TimestampMixin(CreatedAtMixin):
 
 
 class SoftDeleteMixin:
-    deleted_at: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True)
-    )
+    deleted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))

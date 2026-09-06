@@ -69,6 +69,6 @@ class SellerStaff(TimestampMixin, Base):
             "uq_seller_staff_single_owner",
             "seller_id",
             unique=True,
-            postgresql_where=text("role = 'owner'")
+            postgresql_where=text("role = 'owner'"),
         ),
     )
