@@ -2,4 +2,50 @@
 name = "marketpalce"
 version = "0.1.0"
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "alembic>=1.19.1",
+    "asyncpg>=0.31.0",
+    "fastapi>=0.141.1",
+    "pydantic-settings>=2.15.0",
+    "python-dotenv>=1.2.3",
+    "sqlalchemy>=2.0.52",
+    "uvicorn[standard]>=0.52.4",
+]
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
+    "ruff>=0.16.5",
+]
+
+[tool.ruff]
+line-length = 88
+target-version = "py314"
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes — unused imports, undefined names
+    "I",    # isort — import sorting
+    "N",    # pep8-naming — class/function/variable naming
+    "UP",   # pyupgrade — modernize syntax for target Python version
+    "B",    # flake8-bugbear — common logic pitfalls
+    "SIM",  # flake8-simplify — simplify redundant constructs
+    "RUF",  # ruff-specific rules
+]
+ignore = [
+    "E501",  # line too long — handled by the formatter
+]
+
+[tool.ruff.lint.per-file-ignores]
+"src/models/*" = ["UP037"]  # SQLAlchemy resolves annotations at runtime
+
+[tool.ruff.lint.isort]
+known-first-party = ["src"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
